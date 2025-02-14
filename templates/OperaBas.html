@@ -1,20 +1,43 @@
 {% extends "layout.html" %}
 {% block container %}
-<div class="container">
+<div class="container"> 
     <div class="column left">
-        <h1>Calcular</h1>
-        <form action="/Resultado" method="post">
-            <label for="N1">Número 1:</label>
-            <input type="number" name="N1"><br>
-            <label for="N2">Número 2:</label>
-            <input type="number" name="N2"><br>
-            <input type="submit" value="Calcular" class="btn btn-primary">
-        </form>
+      <h1>Calcular</h1>
+      <form action="/Resultado" method="post">
+        <div class="form-group">
+          <label for="N1">Número 1:</label>
+          <input type="number" name="N1" id="N1" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="N2">Número 2:</label>
+          <input type="number" name="N2" id="N2" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>Operación:</label><br>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="operacion" id="suma" value="suma" class="form-check-input" checked>
+            <label class="form-check-label" for="suma">Suma</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="operacion" id="resta" value="resta" class="form-check-input">
+            <label class="form-check-label" for="resta">Resta</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="operacion" id="multiplicacion" value="multiplicacion" class="form-check-input">
+            <label class="form-check-label" for="multiplicacion">Multiplicación</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="operacion" id="division" value="division" class="form-check-input">
+            <label class="form-check-label" for="division">División</label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Calcular</button>
+      </form>
     </div>
     <div class="column right">
-        <h1>El resultado es {{resultado}}</h1>  
+      <h1>El resultado es: {{ resultado }}</h1>  
     </div>
-</div>
+  </div>
 
 
 {% endblock %}

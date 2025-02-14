@@ -10,6 +10,9 @@ def index():
 @app.route('/ejemplo1')
 def ejemplo1():
     return render_template("ejemplo1.html")
+@app.route('/ejemplo1macro')
+def ejemplo1macro():
+    return render_template("ejemplomacro1.html")
 @app.route('/ejemplo2')
 def ejemplo2():
     return render_template("ejemplo2.html")
@@ -19,11 +22,34 @@ def Operas():
 
 @app.route("/Resultado", methods=["GET","POST"])
 def Resultado():
-    if request.method=="POST":
-        num1=request.form.get("N1")
-        num2=request.form.get("N2")
-        resultado=int(num2)+int(num1)
-        return render_template("OperaBas.html",resultado=resultado)
+    if request.method == "POST":
+        num1 = request.form.get("N1")
+        num2 = request.form.get("N2")
+        operacion = request.form.get("operacion")
+        
+        try:
+            # Convertir a float para permitir operaciones con decimales
+            num1 = float(num1)
+            num2 = float(num2)
+        except ValueError:
+            resultado = "Error: Números inválidos"
+            return render_template("OperaBas.html", resultado=resultado)
+        
+        if operacion == "suma":
+            resultado = num1 + num2
+        elif operacion == "resta":
+            resultado = num1 - num2
+        elif operacion == "multiplicacion":
+            resultado = num1 * num2
+        elif operacion == "division":
+            if num2 == 0:
+                resultado = "Error: División por cero"
+            else:
+                resultado = num1 / num2
+        else:
+            resultado = "Operación no reconocida"
+        
+        return render_template("OperaBas.html", resultado=resultado)
 
 @app.route("/user/<string:user>")
 def user(user):
